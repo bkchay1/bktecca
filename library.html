@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bktecca.library</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+       
+       /* NAVIGATION BAR */
+
+        /* CSS styles go here */
+        body {
+            font-family: geologica;
+            font-weight: 200;
+            margin: 0;
+            padding: 0;
+            background-color: #e3e3e3;
+        }
+
+        header {
+            top:0;
+            position: fixed;
+            width: 100%;
+            height:5.5%;
+            background-color:#e3e3e3;
+            color: #000;
+            text-align: center;
+            z-index: 999;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0.2svw;
+            margin-top: 0.8svw;
+            margin-bottom: 0.1svw;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: #000000;
+            padding: 10px; 
+            text-decoration: none;
+            font-size: 16px; /* Set a base font size */
+            font-weight: 400;
+            transition: all 0.6s ease; /* Smooth transition effect */
+        }
+
+        #navText {
+        position: absolute; /* Position the text absolutely within the header */
+        margin-left: 1.5svw;
+        font-size: 18px; /* Set the font size */
+        font-weight: 450; /* Make the text bold */
+        Background-color: rgb(208, 208, 208);
+        color: #e3e3e3;
+        }
+
+        nav ul li a:hover {
+            font-weight: bold; /* Makes the text bold */
+            /* font-size: 18px;  Slightly increases the text size DISABLED */
+            /* transform: scale(1.1);  Scales the text slightly larger DISABLED */
+            text-decoration: none; /* Removes underline on hover */
+            transition: all 0.6s ease;
+        }
+
+        h1 {
+            margin-left: 1svw;
+        }
+
+        p {
+            text-align: center;
+        }
+
+
+
+    /* ALBUM GRID AND ALBUM COVERS */
+
+        #albumGrid {
+            position: relative;
+            margin-top: 3svw;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            /* transition: 0.5s ease; */
+        }
+
+        #albumGrid.sidebar-open {
+            margin-top: -16.6svw;
+            justify-content: left;
+            margin-left: -18.8svw;
+            display: flex;
+            flex-wrap: wrap;
+            transform: scale(0.668);
+        }
+
+        .album-cover {
+            position: relative;
+            width: 269.5px;
+            height: 269.5px;
+            margin: 10px;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            /* transition: 0.5s ease; */
+        }
+
+        .album-cover:hover {
+            transform: scale(1.015); /* Slightly enlarges the album cover on hover */
+            transition: all 0.5s ease;
+        }
+
+
+
+    /* SIDEBAR */
+
+        /* Sidebar styles */
+        #sidebar {
+            position: fixed;
+            top: 3svw;
+            right: 0svw;
+            height: 100%;
+            width: 0; /* Initially hidden */
+            background-color: #e3e3e3;
+            overflow-x: hidden;
+            transition: 0.3s ease;
+            z-index: 998;
+        }
+
+        #sidebar button {
+            cursor: point;
+            position: relative;
+            top: 1svw;
+            right: -0.5svw;
+            font-size: 2svw;
+            border: none;
+            background: transparent;
+        }
+
+        #sidebar.no-transition{ /* disables animation on close */
+            transition:none;
+        }
+
+        #sidebar.open{ /* enables animation on initial sidebar open */
+            transition: 0.3s ease; 
+        }
+        
+        #sidebar h2  {
+            font-size: 2.5svw; /* Adjust based on your design */
+            margin-left: 0.9svw;
+            margin-top: 1.5svw;
+            align-items: left;
+            position: relative;
+        }
+
+        #sidebar h3 {
+            font-size: 1.3svw;
+            margin-left: 1svw;
+            margin-top: -2.3svw;
+            position: relative;
+
+        }
+
+        #sidebar h4 {
+            margin-left:1svw;
+            margin-top: -0.8svw;
+            margin-bottom: 3svw;
+            font-weight: lighter;
+            position: relative;
+
+        }
+
+        #sidebar p {
+            font-size: 1svw;
+            text-align: left;
+            margin-left: 1svw;
+            position: relative;
+
+        }
+
+        #closeSidebar {
+            background: none;
+            border: none;
+            font-size: 2svw;
+            cursor: pointer;
+            color: black; /* Default color */
+        }
+
+
+        #closeSidebar:hover{
+            font-weight: 599.5; /* Makes the text bold */
+            text-decoration: none; /* Removes underline on hover */
+            transition: all 0.2s ease;
+        }
+
+        .sidebar-image {
+        width: 10svw;         /* Adjust width as needed */
+        height: auto;        /* Maintain aspect ratio */
+        /* padding: 4svw;   /* Optional: spacing around the image */
+        /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: shadow effect */
+        /* margin-bottom: -3svw; */
+        margin-top: -2svw;
+        position: relative;
+
+        }
+
+        .sidebar-autograph {
+            width: 15svw;
+            height: auto;
+            margin-top: -4svw;
+            display:block;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                <div id="navText">‎  BKTECCA ‎</div>
+                <li><a href="index.html">home</a></li>
+                <li><a href="library.html">library</a></li>
+                <li><a href="#">collections</a></li>
+                <li><a href="gallery.html">gallery</a></li>
+                <li><a href="dataStatistics.html">data & statistics</a></li>
+                <li><a href="spinCycle.html">spin cycle</a></li>
+                <li><a href="#">wishlist</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="albumGrid"></div>
+
+    <div id="sidebarBackground"></div>
+    
+
+    <!-- Sidebar for displaying album information -->
+    <div id="sidebarOverlay"></div>
+    <div id="sidebar">
+
+        <button id="closeSidebar">X</button>
+
+        <h2 id="albumTitle"></h2>
+        <h3 id="albumArtist"></h3>
+        <h4 id="releaseDate"></h4>
+        <p id="coverUrl"></p>
+        <p id="genre"></p>
+        <p id="purchaseDate"></p>
+        <p id="purchasedFrom"></p>
+        <p id="color"></p>
+        <p id="condition"></p>
+        <p id="price"></p>
+        <p id="notes"></p>
+        <div id="autographContainer"></div> 
+
+    <script>
+
+
+
+        // Your Google Sheets API URL
+        const apiUrl = "https://sheets.googleapis.com/v4/spreadsheets/1Eb3UBnNtgJaNPze0PAMBSqIacFPGbL5t8i8_E0_rjE8/values/Sheet1?key=AIzaSyASfpIsVmnaFdO9xw4e3Pfk8QpZlbvGRTo";
+
+        // Fetch the data from Google Sheets
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                const albums = data.values; // Data from Google Sheets
+                populateAlbumGrid(albums);
+            })
+            .catch(error => console.error('Error fetching data:', error));
+
+        // Function to populate the album grid
+        function populateAlbumGrid(albums) {
+            const albumGrid = document.getElementById('albumGrid');
+            
+            // Start from index 1 to skip the header row
+            albums.slice(1).forEach(album => {
+                const [
+                    title,       // Column A
+                    artist,      // Column B
+                    releaseDate, // Column C
+                    genre,       // Column D
+                    purchaseDate, // Column F
+                    purchasedFrom, // Column G
+                    color,       // Column H
+                    condition,   // Column I
+                    price,       // Column J
+                    notes,        // Column K
+                    coverUrl,     // Column L
+                    autographUrl     
+                ] = album;
+
+                // Create an album cover element
+                const albumCover = document.createElement('img');
+                albumCover.src = coverUrl || "https://www.example.com/image.jpg"; // Replace with cover URL from your sheet if applicable
+                albumCover.alt = title;
+                albumCover.classList.add('album-cover');
+                
+                // Add click event to open sidebar with more details, CAN ADD coverUrl FOR BACKGROUND
+                albumCover.addEventListener('click', () => openSidebar({
+                    title, artist, coverUrl, releaseDate, genre, purchaseDate, purchasedFrom, color, condition, price, notes, autographUrl
+                }));
+
+                // Append the cover to the grid
+                albumGrid.appendChild(albumCover);
+            });
+
+        }
+
+
+
+        // Function to open the sidebar and populate it with album data
+        function openSidebar(album) {
+            document.getElementById('albumTitle').textContent = album.title;
+            document.getElementById('albumArtist').textContent = album.artist;
+            document.getElementById('releaseDate').textContent = album.releaseDate;
+            document.getElementById('coverUrl').innerHTML = `<img src="${album.coverUrl}" alt="${album.title}" />`;
+            document.getElementById('genre').textContent = `Genre: ${album.genre}`;
+            document.getElementById('purchaseDate').textContent = `Purchase Date: ${album.purchaseDate}`;
+            document.getElementById('purchasedFrom').textContent = `Purchased From: ${album.purchasedFrom}`;
+            document.getElementById('color').textContent = `Color: ${album.color}`;
+            document.getElementById('condition').textContent = `Condition: ${album.condition}`;
+            document.getElementById('price').textContent = `Price: ${album.price}`;
+            document.getElementById('notes').textContent = `Notes: ${album.notes}`;
+
+
+            /* retrieve cover image for sidebar */
+            const img = document.createElement('img');
+            img.src = album.coverUrl;
+            img.alt = album.title;
+            img.classList.add('sidebar-image'); // Add the CSS class here
+            document.getElementById('coverUrl').innerHTML = ''; // Clear any previous content
+            document.getElementById('coverUrl').appendChild(img);
+
+
+            /* Check if an autograph image exists, and display it if so */
+            const autographContainer = document.getElementById('autographContainer');
+            autographContainer.innerHTML = ''; // Clear previous content
+            if (album.autographUrl) {
+                const autographImg = document.createElement('img');
+                autographImg.src = album.autographUrl;
+                autographImg.alt = `Autograph for ${album.title}`;
+                autographImg.classList.add('sidebar-autograph'); // Add CSS class for styling
+                autographContainer.appendChild(autographImg);
+            }
+
+            //Apply open class for animation and grid changes
+            sidebar.classList.add('open');
+            albumGrid.classList.add('sidebar-open');
+
+            // Open sidebar and apply grid changes
+            document.getElementById('sidebar').classList.add('open');
+            document.getElementById('albumGrid').classList.add('sidebar-open'); /* applies grid scale change when sidebar open */
+            
+            // Show the sidebar and overlay
+            
+            document.getElementById('sidebar').style.width = '20svw';
+            document.getElementById('sidebarOverlay').style.display = 'block';
+        }
+
+            // Wait for the DOM to load
+            document.addEventListener('DOMContentLoaded', function() {
+            // Attach click event to the "X" button to close the sidebar
+            document.getElementById('closeSidebar').addEventListener('click', function(event) {
+                event.stopPropagation(); // Stop event from bubbling up to the document
+                closeSidebar();
+            });
+
+        // Close sidebar when clicking outside
+            document.addEventListener('click', function(event) {
+                const sidebar = document.getElementById('sidebar');
+                const albumGrid = document.getElementById('albumGrid');
+                
+                
+
+                // Check if the clicked element is outside the sidebar and album grid
+                if (!sidebar.contains(event.target) && !albumGrid.contains(event.target)) {
+                    closeSidebar();
+                }
+            });
+        });
+
+// Close sidebar function
+function closeSidebar() {
+    const sidebar = document.getElementById('sidebar'); // Added this line to fetch sidebar
+    sidebar.style.width = '0';
+    document.getElementById('sidebarOverlay').style.display = 'none';
+    sidebar.classList.remove('open');
+    document.getElementById('albumGrid').classList.remove('sidebar-open');
+    sidebar.classList.add('no-transition');
+}
+    </script>
+</body>
+</html>

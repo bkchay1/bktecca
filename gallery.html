@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bktecca.gallery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap" rel="stylesheet">
+
+   
+    
+    <style>
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            top: -64svw;
+            height: 0;
+            overflow: hidden;
+            max-height: 1svw;
+            max-width: 44svw;
+            margin-left: 3svw;
+          
+            background: #00000000;
+            z-index:99;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        body { /* Make backgorund custom image */
+            margin: 0;
+            padding: 0;
+            /* background-image: url('https://images.unsplash.com/photo-1547921258-8af92f82b4d6?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); */
+            background-size: cover;
+            
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        /* CSS styles go here */
+        body {
+            font-family: geologica;
+            font-weight: 100;
+            margin: 0;
+            padding: 0;
+            background-color:#e3e3e3;;;
+        }
+    
+        header {
+            top:0;
+            bottom:5svw;
+            position: fixed;
+            width: 100%;
+            height:5.5%;
+            background-color:#e3e3e3;
+            color: #e3e3e3;
+            text-align: center;
+            z-index: 999;
+        }
+
+    
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 0.8svw;
+            margin-bottom: 0.1svw;
+        }
+    
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+    
+        nav ul li a {
+            color: #000000;
+            padding: 10px; 
+            text-decoration: none;
+            font-size: 16px; /* Set a base font size */
+            font-weight: 275;
+            transition: all 0.6s ease; /* Smooth transition effect */
+        }
+    
+        nav ul li a:hover {
+            font-weight: bold; /* Makes the text bold */
+            /*font-size: 18px; /* Slightly increases the text size  DISABLED */
+            /*transform: scale(1.1); /* Scales the text slightly larger  DISABLED */
+            text-decoration: none; /* Removes underline on hover */
+        }
+
+        #navText {
+        position: absolute; /* Position the text absolutely within the header */
+        margin-left: 1.5svw;
+        font-size: 18px; /* Set the font size */
+        font-weight: 450; /* Make the text bold */
+        Background-color: rgb(208, 208, 208);
+        color: #e3e3e3;
+        }
+
+        /* Page Text */
+    
+        h1 {
+            color: #000000;
+            margin-top:8svw;
+            margin-left: 3svw;
+            margin-bottom: 0.3svw;
+            text-align:left;
+            font-size: 4.5svw;
+            font-weight:850;
+        }
+    
+        p {
+            color: #000000;
+            text-align: left;
+            margin-top: 0svw;
+            margin-left: 3.5svw;
+            margin-right:10svw;
+            margin-bottom:1svw;
+            font-size: 1.2svw
+        }
+        
+        h2 {
+            color:#000000;
+            font-size:2.4svw;
+            font-weight: 300;
+            margin-top: 6svw;
+            margin-right: 3svw;
+            margin-left: 50svw;
+            margin-bottom:1svw;
+            text-align: left;
+        }
+
+        h2 + p {
+            text-align: left;
+            font-size:1svw;
+            margin-top:0svw;
+            margin-right: 3svw;
+            margin-left:50svw;
+        }
+
+        h3 {
+            color:#000000;
+            font-size:2.4svw;
+            font-weight: 300;
+            margin-top: 19svw;
+            margin-left: 3svw;
+            margin-bottom:1svw;
+            text-align: left;
+        }
+
+        h3 + p {
+            font-size:1svw;
+            margin-left: 3svw;
+            margin-right:65svw;
+        }
+
+        h4 {
+            font-size:2.4svw;
+            font-weight: 300;
+            margin-top: -18svw;
+            margin-left: 52svw;
+            margin-bottom:1svw;
+            text-align: left;
+        }
+
+        h4 + p {
+            font-size: 1svw;
+            margin-left: 52svw;
+            margin-right: 24svw;
+        }
+
+        .image-container1 {
+        display: flex;
+        position: absolute;
+        flex-direction: column; /* Flexbox to align images horizontally */
+        justify-content: space-between; /* space between images */
+        max-width: 40svw; /* Adjust the width of the container */
+        gap:1svw;
+        margin-left: 35svw;
+        margin-right: 0svw; /* Add spacing to the right */
+        margin-top: -72svw; /* Adjust if necessary */
+        }
+
+        .gallery-image {
+            width: 34%; /* Adjust width to make images fit in the container */
+            margin-left: 1svw;
+            object-fit: contain;
+        }
+
+        .image-container2 {
+            display:flex;
+            max-width:59svw;
+            position:relative;
+        }
+
+        .gallery-image2 {
+            position:relative;
+            width: 35%;
+            margin-top: -117svw;
+            margin-right: 12svw;
+            margin-left:76.5svw;
+            object-fit: contain;
+        }
+
+        .gallery-image3 {
+            position:relative;
+            width: 35%;
+            margin-top: -117svw;
+            margin-right: 12svw;
+            margin-left:76.5svw;
+            object-fit: contain;
+        }
+
+        .image-container3 {
+            display: flex;
+            position: absolute;
+            flex-direction: column; /* Flexbox to align images horizontally */
+            justify-content: space-between; /* space between images */
+            max-width: 5svw; /* Adjust the width of the container */
+            gap:10svw;
+            margin-left: 5svw;
+            margin-right: 75svw; /* Add spacing to the right */
+            margin-top: -72svw; /* Adjust if necessary */
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <div id="navText">‎ BKTECCA ‎</div>
+                <li><a href="index.html">home</a></li>
+                <li><a href="library.html">library</a></li>
+                <li><a href="#">collections</a></li>
+                <li><a href="gallery.html">gallery</a></li>
+                <li><a href="dataStatistics.html">data & statistics</a></li>
+                <li><a href="spinCycle.html">spin cycle</a></li>
+                <li><a href="#">wishlist</a></li>
+            </ul>
+        </nav>
+    </header>
+
+<main>
+    <h1>The Gallery</h1>
+    <p> This is a colleciton of small projects and artworks that I've made throughout the years. Many of them are or were heavily inspired by some of my favorite music of the time, so I found it fitting they have a place in my digital "music library". I feel my expereinces and perspective of these records can often be rather nuanced, thus these projects help contribute to a more encompassing and cohesive catalog of it all. </p>
+
+    <h2>Scene's Accross Japan - Frank Ocean's "Rushes"</h2>
+    <p>This is a montage of videos I took on my trip to Japan in December of 2022. It was my first time out of the country, and an adventure I took on with only my older brother and his friend. I had discovered Frank Ocean's Endless earlier in the fall that year, and listened to the album thoroughly throughout the trip.</p>
+
+    <h3>Ceramic CS01</h3>
+    <p>A simple key dish I made around the time "Never Enough" was released. I had preordered the album and kept the CD on repeat in my car during the final stretch of my senior year of highschool. I wanted to make something inspired by the music that became a sort of bakcground track for my life at the time, and the simple design of the CS01 cover seemed to fit the bill. The dish has become an integral part of my almost ritual when I enter my room. I beeline to it to have a place to set my keys and wallet down so I can finally feel at home and relaxed. I think of it like when the dads in the tv shows come home and sigh as they take off their belt and land on their recliner after a long day of work. Haha.</p>
+
+    <h4>Montage Folder</h4>
+    <p>I started using this folder at the beginning of my Junior year in highschool. It was around this time that I also started collecting records. I started with the MBDTF painting in the corner, and would slowly add albums all through that following summer. The last one I added was the MM&TBS cover, which I felt heavily inspired to put on after seeing Kendrick on tour for what happened to be my first real concert. </p>
+</main>
+
+    <div class="video-container">
+        <iframe src="https://player.vimeo.com/video/1009377703?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
+                width="640" 
+                height="360" 
+                frameborder="0" 
+                allow="autoplay; fullscreen; picture-in-picture" 
+                allowfullscreen>
+        </iframe>
+
+    </div>
+
+    <div class="image-container1">
+            <img src ="https://i.imgur.com/ABr7WBS.jpeg" alt="CS01Film" class="gallery-image">
+            <img src ="https://i.imgur.com/yxc9TbC.jpeg" alt="CS01Progress" class="gallery-image">
+    </div>>
+
+    <div id="imageContainer2" class="image-container2">
+        <img src="https://i.imgur.com/K30IxUr.jpeg" alt="Image 3" class="gallery-image2">
+    </div>
+            
+   <div id="imageContainer3" class=""image-container3">
+        <img src="https://i.imgur.com/yO0jGTL.png" alt="BH Montage" class="gallery-image3">
+        <img src="https://i.imgur.com/NS9NSH1.jpeg" alt="BH Framed" class="gallery-image3">
+   </div>
+    
+</body>
+</html>
+
+

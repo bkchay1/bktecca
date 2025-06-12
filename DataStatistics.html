@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bktecca.dataStatistics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        body {
+            font-family: geologica;
+            font-weight: 100;
+            margin: 0;
+            padding: 0;
+            background-color:#e3e3e3;
+        }
+    
+        header {
+            top:0;
+            bottom:5svw;
+            position: fixed;
+            width: 100%;
+            height:5.5%;
+            background-color:#e3e3e3;
+            color: #e3e3e3;
+            text-align: center;
+            z-index: 999;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 0.8svw;
+            margin-bottom: 0.1svw;
+        }
+    
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+    
+        nav ul li a {
+            color: #000000;
+            padding: 10px; 
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 275;
+            transition: all 0.6s ease;
+        }
+
+        nav ul li a:hover {
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        #navText {
+        position: absolute;
+        margin-left: 1.5svw;
+        font-size: 18px;
+        font-weight: 450;
+        color: #e3e3e3;
+        }
+
+        h1 {
+            margin-top:4svw;
+            margin-left: 1.5svw;
+            font-size: 4svw;
+            font-weight:850;
+        }
+
+        .stats {
+            margin-left: 1.5svw;
+        }
+
+        .totalRecords {
+            font-size: 1svw;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <div id="navText">‎ BKTECCA ‎</div>
+                <li><a href="index.html">home</a></li>
+                <li><a href="library.html">library</a></li>
+                <li><a href="#">collections</a></li>
+                <li><a href="gallery.html">gallery</a></li>
+                <li><a href="dataStatistics.html">data & statistics</a></li>
+                <li><a href="spinCycle.html">spin cycle</a></li>
+                <li><a href="#">wishlist</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Data & Statistics</h1>
+        <div class="stats">
+            <p><span id="totalRecords">0</span> Total Records</p>
+            <p><span id="recordsLastMonth">0</span> Records Added in the Past Month</p>
+            <p><span id="recordsLastYear">0</span> Records Added in the Past Year</p>
+            <p>Average Track Length: <span id="averageTrackLength">0:00</span></p>
+        </div>
+
+        <!-- Canvas for pie chart -->
+        <canvas id="genrePieChart" width="400" height="400"></canvas>
+
+        <style>
+            /* Change the size of the pie chart */
+            #genrePieChart {
+        width: 30svw;  /* Adjust the width */
+        height: 30svw; /* Adjust the height */
+        margin: 20px auto; /* Center it horizontally and add vertical spacing */
+        display: block; /* Ensures the margin auto works */
+        justify-items: right;
+            }
+        </style>
+
+        <script>
+            const apiUrl = "https://sheets.googleapis.com/v4/spreadsheets/1Eb3UBnNtgJaNPze0PAMBSqIacFPGbL5t8i8_E0_rjE8/values/Sheet1?key=AIzaSyASfpIsVmnaFdO9xw4e3Pfk8QpZlbvGRTo";
+
+            // Fetch the data once and use it for both stats and the pie chart
+            fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                const albums = data.values.slice(1); // Skip the header row
+                const today = new Date();
+                
+                let totalRecords = albums.length;
+                let recordsLastMonth = 0;
+                let recordsLastYear = 0;
+                let totalTrackLengthInSeconds = 0;
+                let trackCount = 0;
+                const genreCount = {}; // For counting genres
+
+                albums.forEach(album => {
+                    const purchaseDateStr = album[4]; // Column E: Purchase Date
+                    const purchaseDate = new Date(purchaseDateStr);
+
+                    // Calculate days difference
+                    const timeDifference = today - purchaseDate;
+                    const daysDifference = timeDifference / (1000 * 60 * 60 * 24); // Convert ms to days
+
+                    // Stats for records added in the last month/year
+                    if (daysDifference <= 30 && daysDifference >= 0) {
+                        recordsLastMonth++;
+                    }
+                    if (daysDifference <= 365 && daysDifference >= 0) {
+                        recordsLastYear++;
+                    }
+
+                    // Genre count (Column D: Genre)
+                    const genresStr = album[3];
+                    const firstGenre = genresStr.split(",")[0].trim(); // Get the first genre listed
+                    if (genreCount[firstGenre]) {
+                        genreCount[firstGenre]++;
+                    } else {
+                        genreCount[firstGenre] = 1;
+                    }
+
+                    // Track length calculation (Column P)
+                    const trackLengthStr = album[15]; // Column P (0-indexed is 15)
+                    if (trackLengthStr) {
+                        const timeParts = trackLengthStr.split(':');
+                        const minutes = parseInt(timeParts[0]);
+                        const seconds = parseInt(timeParts[1]);
+
+                        // Convert track length to seconds
+                        const trackLengthInSeconds = (minutes * 60) + seconds;
+
+                        totalTrackLengthInSeconds += trackLengthInSeconds;
+                        trackCount++;
+                    }
+                });
+
+                // Update stats on the page
+                document.getElementById('totalRecords').innerText = totalRecords;
+                document.getElementById('recordsLastMonth').innerText = recordsLastMonth;
+                document.getElementById('recordsLastYear').innerText = recordsLastYear;
+
+                // Calculate average track length in seconds
+                const averageTrackLengthInSeconds = trackCount > 0 ? (totalTrackLengthInSeconds / trackCount) : 0;
+
+                // Convert average back to minutes and seconds
+                const avgMinutes = Math.floor(averageTrackLengthInSeconds / 60);
+                const avgSeconds = Math.floor(averageTrackLengthInSeconds % 60);
+
+                // Display the average track length (e.g., "3:45")
+                document.getElementById('averageTrackLength').innerText = `${avgMinutes}:${avgSeconds.toString().padStart(2, '0')}`;
+
+                // Generate the pie chart using Chart.js
+                const genres = Object.keys(genreCount);
+                const counts = Object.values(genreCount);
+                const ctx = document.getElementById('genrePieChart').getContext('2d');
+                
+                new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: genres,
+                        datasets: [{
+                            data: counts,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true
+                    }
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+        </script>
+    </main>
+</body>
+</html>
